@@ -1,0 +1,82 @@
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+html, body { margin: 0; height: 100%; }
+body {
+  background: #000;
+  color: #fff;
+  font: 22px/1.4 system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.screen {
+  min-height: 100%;
+  padding: 20px 16px 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+h1 { margin: 0; font-size: 28px; font-weight: 600; padding-right: 56px; }
+
+/* список песен */
+.card { display: flex; gap: 8px; margin-bottom: 12px; }
+.song {
+  flex: 1; text-align: left; padding: 20px 16px;
+  background: #1c1c1c; color: #fff; border: 0; border-radius: 14px; font: inherit;
+}
+.song:active { background: #333; }
+.del {
+  width: 56px; background: #1c1c1c; color: #888;
+  border: 0; border-radius: 14px; font-size: 20px;
+}
+#empty { color: #aaa; }
+
+/* кнопки */
+.btn {
+  background: #ffd400; color: #000; border: 0; border-radius: 14px;
+  padding: 18px; font: inherit; font-weight: 600;
+}
+.fab {
+  position: fixed; right: 20px; bottom: 20px;
+  width: 72px; height: 72px; border-radius: 50%;
+  background: #ffd400; color: #000; border: 0; font-size: 40px; line-height: 1;
+}
+.close {
+  position: fixed; top: 12px; right: 12px; z-index: 1;
+  width: 52px; height: 52px; border-radius: 50%;
+  background: #1c1c1c; color: #fff; border: 0; font-size: 24px;
+}
+
+/* форма */
+label { display: flex; flex-direction: column; gap: 6px; color: #aaa; font-size: 18px; }
+input, textarea {
+  background: #1c1c1c; color: #fff; border: 0; border-radius: 12px;
+  padding: 14px; font: inherit;
+}
+
+/* плеер */
+#player { height: 100%; padding-bottom: 20px; }
+#songText {
+  flex: 1; margin: 0; overflow-y: auto;
+  font: inherit; font-size: 26px; line-height: 1.6; white-space: pre-wrap;
+}
+#seek { padding: 0; accent-color: #ffd400; background: none; }
+
+/* комната */
+#roomBar { display: flex; gap: 8px; }
+#roomBar .btn { flex: 1; padding: 14px; font-size: 18px; }
+#roomBar .btn:disabled { background: #1c1c1c; color: #ffd400; }
+#roomBar .ghost { flex: 0 0 auto; padding: 14px 20px; background: #1c1c1c; color: #fff; }
+.song.shared { border-left: 6px solid #ffd400; }
+#status { margin: 0; color: #aaa; font-size: 18px; }
+
+/* виды песен */
+.song { display: flex; flex-direction: column; gap: 2px; }
+.song small { color: #7ab8ff; font-size: 15px; }
+.song.cloud { border-left: 6px dashed #4aa3ff; background: #14202c; }
+.share {
+  width: 84px; padding: 0 6px; background: #1c1c1c; color: #ffd400;
+  border: 0; border-radius: 14px; font: inherit; font-size: 15px; line-height: 1.2;
+}
+#legend { margin: 0; color: #888; font-size: 16px; }
