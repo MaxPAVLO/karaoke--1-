@@ -1,6 +1,6 @@
 // Сохраняет файлы приложения, чтобы оно открывалось без интернета.
-// Изменили код? Увеличьте номер версии (v3 -> v4).
-const CACHE = 'karaoke-v4';
+// Изменили код? Увеличьте номер версии (v4 -> v5).
+const CACHE = 'karaoke-v5';
 const FILES = [
   './', 'index.html', 'style.css', 'config.js', 'cloud.js', 'db.js', 'player.js', 'app.js',
   'manifest.json', 'icons/icon-192.png', 'icons/icon-512.png',
