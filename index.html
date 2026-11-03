@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <title>Караоке</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <section id="list" class="screen">
+    <h1>Мои песни</h1>
+    <div id="roomBar">
+      <button id="roomBtn" class="btn">Войти в комнату</button>
+      <button id="leaveBtn" class="btn ghost" hidden>Выйти</button>
+    </div>
+    <p id="status" hidden></p>
+    <div id="songs"></div>
+    <p id="empty" hidden>Песен пока нет. Нажмите «+», чтобы добавить.</p>
+    <button id="add" class="fab" aria-label="Добавить песню">+</button>
+  </section>
+
+  <section id="form" class="screen" hidden>
+    <button class="close" id="cancel" aria-label="Закрыть">✕</button>
+    <h1>Новая песня</h1>
+    <label>Название
+      <input id="title" autocomplete="off">
+    </label>
+    <label>Музыка (минусовка)
+      <input id="file" type="file" accept="audio/*">
+    </label>
+    <label>Текст песни
+      <textarea id="lyrics" rows="9"></textarea>
+    </label>
+    <button id="save" class="btn">Сохранить</button>
+  </section>
+
+  <section id="player" class="screen" hidden>
+    <button class="close" id="stop" aria-label="Закрыть">✕</button>
+    <h1 id="songTitle"></h1>
+    <pre id="songText"></pre>
+    <input id="seek" type="range" min="0" max="1000" value="0" aria-label="Перемотка">
+    <button id="toggle" class="btn">Пауза</button>
+  </section>
+
+  <audio id="audio"></audio>
+
+  <script src="config.js"></script>
+  <script src="cloud.js"></script>
+  <script src="db.js"></script>
+  <script src="player.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
