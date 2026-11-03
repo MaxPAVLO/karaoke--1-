@@ -178,30 +178,28 @@ $('roomBtn').onclick = async () => {
 
 $('leaveBtn').onclick = async () => {
   const room = store.room;
-  if (!confirm('Выйти из комнаты?\n\nВсе песни комнаты останутся на вашем телефоне. Нужен интернет.')) return;
+  if (!confirm('Выйти из комнаты?\n\nНа телефоне останутся только песни, которые уже скачаны (с жёлтой полоской). Песни с голубой полоской пропадут из списка.\n\nНужен интернет.')) return;
 
   busy++;
   try {
-    // 1. докачать все песни, чтобы они остались в телефоне
+    // 1. выйти из комнаты
+    const deleted = await Cloud.leave(room, store.device);
+
+    // 2. скачанные песни становятся личными, нескачанные убираем
     const mine = (await DB.all()).filter(s => s.room === room);
-    for (let i = 0; i < mine.length; i++) {
-      if (!mine[i].audio) {
-        setStatus(`Скачиваю песни: ${i + 1} из ${mine.length}`);
-        mine[i].audio = await Cloud.download(mine[i].audioPath);
-        await DB.put(mine[i]);
+    for (const s of mine) {
+      if (s.audio) {
+        s.room = null; s.remoteId = null; s.audioPath = null;
+        await DB.put(s);
+      } else {
+        await DB.remove(s.id);
       }
     }
-    // 2. выйти из комнаты
-    const deleted = await Cloud.leave(room, store.device);
-    // 3. песни становятся личными
-    for (const s of mine) {
-      s.room = null; s.remoteId = null; s.audioPath = null;
-      await DB.put(s);
-    }
+
     store.room = '';
     setStatus('');
     await renderList();
-    if (deleted) alert('Комната удалена: в ней больше никого нет. Песни остались у вас на телефоне.');
+    if (deleted) alert('Комната удалена: в ней больше никого нет. Скачанные песни остались у вас на телефоне.');
   } catch (e) {
     setStatus('');
     alert('Не удалось выйти из комнаты. Проверьте интернет и повторите.');
